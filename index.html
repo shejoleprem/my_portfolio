@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prem Shejole - Personal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f9;
+        }
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #003366; /* Dark Blue */
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #0056b3; /* Lighter Blue */
+        }
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .navbar-toggle span {
+            background: #fff;
+            height: 3px;
+            width: 25px;
+            margin: 3px 0;
+            transition: all 0.3s;
+        }
+        .navbar-menu {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Parallax Section */
+        .parallax {
+            background-image: url('/api/placeholder/1200/800');
+            min-height: 400px; /* Reduced height for smaller screens */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .parallax-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .parallax-content img {
+            border-radius: 50%;
+            width: 300px; /* Adjusted size for responsiveness */
+            height: 300px; /* Adjusted size for responsiveness */
+            margin-bottom: 20px;
+            border: 5px solid #fff;
+        }
+        .parallax-content h1 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+            font-size: 1.5rem; /* Responsive font size */
+        }
+        .parallax-content p {
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 1rem; /* Responsive font size */
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h2 {
+            border-bottom: 2px solid #003366; /* Dark Blue */
+            padding-bottom: 10px;
+            color: #003366; /* Dark Blue */
+            margin-bottom: 20px;
+        }
+        .project, .achievement {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .project img, .achievement img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+            transition: transform 0.3s;
+        }
+        .project img:hover, .achievement img:hover {
+            transform: scale(1.05);
+        }
+        .achievement {
+            background-color: #e9ecef;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border-left: 5px solid #003366; /* Dark Blue */
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .achievement img {
+            margin-right: 15px;
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+        }
+        .achievement-content {
+            max-width: calc(100% - 120px);
+        }
+        .btn {
+            display: inline-block;
+            background: #003366; /* Dark Blue */
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3; /* Lighter Blue */
+        }
+
+        /* Header and About Me Styling */
+        .header-about-container {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        .header-about-container img {
+            border-radius: 50%;
+            width: 150px; /* Adjusted size for responsiveness */
+            height: 150px; /* Adjusted size for responsiveness */
+            border: 5px solid #003366; /* Dark Blue */
+        }
+        .header-about-container .about-text {
+            max-width: 100%;
+        }
+
+        /* Highlights Section */
+        .highlights {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlights h2 {
+            color: #003366; /* Dark Blue */
+            margin-bottom: 20px;
+        }
+        .highlight-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .highlight-images img {
+            width: calc(33.333% - 20px); /* Three images per row with gap */
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Ensure image covers area without distortion */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .highlight-images img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px; /* Adjust based on navbar height */
+                left: 0;
+                background-color: #003366; /* Dark Blue */
+                text-align: center;
+            }
+            .navbar-menu.active {
+                display: flex;
+            }
+            .navbar-toggle {
+                display: flex;
+            }
+            .navbar-toggle.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .navbar-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .navbar-toggle.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            .navbar-menu a {
+                padding: 15px;
+                border-bottom: 1px solid #0056b3;
+            }
+            .highlight-images img {
+                width: calc(50% - 20px); /* Two images per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .highlight-images img {
+                width: 100%; /* Full width for mobile */
+                height: auto; /* Auto height to maintain aspect ratio */
+            }
+            .header-about-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .header-about-container img {
+                width: 150px; /* Adjusted size for mobile */
+                height: 150px; /* Adjusted size for mobile */
+            }
+        }
+
+        footer {
+            background-color: #003366; /* Dark Blue */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .footer-link img {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            transition: opacity 0.3s;
+        }
+
+        .footer-link:hover img {
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-menu">
+            <a href="#about">About</a>
+            <a href="#academic-background">Academic Background</a>
+            <a href="#projects">Projects</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#highlights">Highlights</a>
+        </div>
+    </nav>
+
+    <!-- About Me Section -->
+    <section class="section" id="about">
+        <div class="parallax">
+            <div class="parallax-content">
+                <img src="my_photo.jpg" alt="Prem Shejole">
+                <h1>Prem Shejole</h1>
+                <p>Business Intelligence Analyst Intern at TE Connectivity</p>
+            </div>
+        </div>
+        <div class="header-about-container">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>Hello! I'm Prem Shejole, a Business Intelligence Analyst Intern at TE Connectivity. Currently, I am pursuing a B.Tech in Electronics and Telecommunication Engineering at Vishwakarma Institute of Technology, Pune.
+                    <br>I am passionate about technology and have a keen interest in artificial intelligence, machine learning, and software development. My enthusiasm for solving complex problems drives me to explore new technologies and consistently seek opportunities for growth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Background Section -->
+    <section class="section" id="academic-background">
+        <h2>Academic Background</h2>
+        <h3>B.Tech Electronics and Telecommunication</h3>
+        <p>Vishwakarma Institute of Technology, 2021-2025</p>
+        <h3>Higher Secondary School</h3>
+        <p>Rashtrapita Mahatma Gandhi Jr. College of Science, 2020-2021</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <div>
+                <h3>Smart PDF to Data Converter using Generative AI</h3>
+                <p>Tech stack: LangChain, Gemini Pro, Streamlit, Pandas AI, GROQ. <br>
+                    This project provides a solution for converting PDF files into structured data formats, such as JSON, using advanced AI techniques. It offers various functionalities including generalized data extraction, schema-based extraction, and generating insights from the extracted data.
+                </p>
+                <a href="https://github.com/maheshsathe07/AI-powered-PDF-to-Data-Converter" class="btn">GitHub Link</a>
+            </div>
+        </div>
+        <div class="project">
+            <div>
+                <h3>“SkullRuksha”-Helmet Detection Based Vehicle with SMS Alert and Fall Detection</h3>
+                <p>Tech stack: Deep Learning, Raspberry Pi, Roboflow, Python <br>
+                    Developed a system that uses a camera fitted in the speedometer and an object detection model to detect Helmet, achieved 84.4% accuracy using YOLOv5. It prevents the motorcycle from an Accident, if no helmet is detected, then the rider can't exceed the speed 40 kmph, or else the rider can speed up to 150 kmph. The system utilizes a Raspberry Pi computer, motor driver, accelerometer, and APIs for sending notifications and tracking location.
+                </p>
+                <a href="https://docs.google.com/presentation/d/1xfW-pFrq1j_Qav7ugcYA0tLAPV2zIP-O/edit#slide=id.g1364aaa19f5_4_5" class="btn">PPT Link</a>
+            </div>
+        </div>
+        <div class="project">
+            <div>
+                <h3>Airplane Management System</h3>
+                <p>Tech Stack: Database (MySQL), OOPS, Core Java, JDBC.<br>
+                    • Developed a GUI application that manages airplanes, passengers, flights, and bookings.<br>    
+                    • Implemented robust CRUD (Create, Read, Update, Delete) operations, ensuring efficient data handling and manipulation.<br>
+                    • Integrated a MySQL database with the GUI application through JDBC, facilitating real-time data storage and retrieval.
+                </p>
+                <a href="https://github.com/shejoleprem/Airline-Management-System" class="btn">GitHub Link</a>
+            </div>
+        </div>
+        <div class="project">
+            <div>
+                <h3>Fire Weather Index Prediction</h3>
+                <p>Tech Stack: Machine Learning, HTML, CSS, Python.<br>
+                    • Performed Exploratory Data Analysis (EDA) techniques to analyze fire data.<br>
+                    • Developed UI to streamline model input and user interaction.<br>
+                    • Trained the predictive model using advanced algorithms, including Multiple Linear Regression, Decision Tree, and Random Forest Regression. Achieved the highest accuracy of 94.30% through the implementation of the Random Forest Regressor algorithm.
+                </p>
+                <a href="https://github.com/shejoleprem/Fire_weather_index_prediction_project" class="btn">GitHub Link</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="section" id="achievements">
+        <h2>Achievements</h2>
+        <div class="achievement">
+            <div class="achievement-content">
+                <h3>National Level Hackathon</h3>
+                <p>2nd Runner-Up in the National level HackTopia Hackathon Conducted by GNIT Hyderabad.</p>
+            </div>
+        </div>
+        <div class="achievement">
+            <div class="achievement-content">
+                <h3>National Level Logithon</h3>
+                <p>Secured Spot in the top 16 teams amongst 180 participant teams in AI-Powered PDF to Data Converter Problem Statement in Logithon Sponsored by SoftLink Global Pvt. Ltd.</p>
+            </div>
+        </div>
+        <div class="achievement">
+            <div class="achievement-content">
+                <h3>Bhau Institutes I2I Competition, COEP</h3>
+                <p>Finalist in I2I (Idea to Innovation) Conducted by COEP and Sponsored by EATON. Received funding from Eaton for prototype development of helmet detection-based Vehicle project.</p>
+            </div>
+        </div>
+        <div class="achievement">
+            <div class="achievement-content">
+                <h3>HACKKNIGHT'24, VIT Pune</h3>
+                <p>Secured Spot in the top 9 teams amongst 55 participant teams in BlackRock HackKnight’24 Hackathon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights" id="highlights">
+        <h2>Highlights</h2>
+        <div class="highlight-images">
+            <img src="2nd_HackTopia_Certificate.jpg" alt="Highlight 1">
+            <img src="photo_6291612354445686621_y.jpg" alt="Highlight 2">
+            <img src="PW_CERTIFICATE.png" alt="Highlight 3">
+            <img src="logithon_certificate.jpg" alt="Highlight 4">
+            <img src="NAMO_CERTIFICATE.jpg" alt="Highlight 5">
+            <img src="Logithon_goodies.jpg" alt="Highlight 6">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>Contact me:</p>
+            <a href="mailto:shejoleprem01@gmail.com" class="footer-link" title="Email"><img src="mail.png" alt="Email"></a>
+            <a href="https://www.linkedin.com/in/shejole-prem" class="footer-link" title="LinkedIn"><img src="ln.jpg" alt="LinkedIn"></a>
+            <a href="https://github.com/shejoleprem" class="footer-link" title="GitHub"><img src="git.png" alt="GitHub"></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            
+            toggleButton.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                toggleButton.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
